@@ -1,0 +1,31 @@
+Take Home Test for Web Devs
+Time Tracker
+● The objective is to allow a team to track their time as quickly as possible (few
+clicks, efficient UI)
+● Users should be able to sign up and log in.
+● It should allow adding a time entry, with a number of hours and task description
+and project. Projects can be a static, pre-filled list. The current date and time
+should automatically be recorded.
+● The user wants to be able to see their work for the week and totals for each
+project.
+
+
+Instructions
+
+● Back End / Dev Ops applicants only: It should include some form of automated
+front-end test OR REST API tests. Demonstrating just 2 test cases is ok.
+● Back End / Dev Ops applicants only: Dockerize the app, such that it will run on any
+environment with a simple `docker-compose up` command.
+● Back End applicants only: You may use a server side template/form instead of a
+front-end framework. (ie, pure Django)
+● Include atomic commits to GIT and push to a GitHub repo as you work.
+● Include instructions including exact commands for cloning and running the app in
+your README file. Deploying it is optional.
+● Code should be clean, organized, and include comments documenting why the code
+is a certain way, where necessary.
+● Properly package the app with requirements.txt or package.json . Don&#39;t include build
+files or other unnecessary artifacts.
+● When you submit, explain what important choices you made when developing
+the app, and why. Explain how your solution meets the objective of the project.
+● Spend no more than 8 hours on the project, to see how you can manage time when it
+is constrained. If you exceed 8 hours, explain why that happened when you submit.
