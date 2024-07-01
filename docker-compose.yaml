@@ -1,0 +1,37 @@
+services:
+  mysql:
+    image: mysql:5.7.40
+    container_name: timetracker-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: timetracker
+      MYSQL_USER: timetracker_user
+      MYSQL_PASSWORD: L3tmein321!
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - timetracker-network
+
+  app:
+    build: .
+    container_name: timetracker-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/timetracker
+      SPRING_DATASOURCE_USERNAME: timetracker_user
+      SPRING_DATASOURCE_PASSWORD: L3tmein321!
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+    depends_on:
+      - mysql
+    networks:
+      - timetracker-network
+
+networks:
+  timetracker-network:
+
+volumes:
+  mysql-data:
