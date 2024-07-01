@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Time Tracker</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .pagination ul {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+        .pagination li {
+            display: inline;
+            font-size: 14px;
+        }
+        .pagination li a {
+            color: #333;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+        .pagination li.active a {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+        .pagination li a:hover:not(.active) {background-color: #ddd;}
+        .pagination li.disabled a {
+            pointer-events: none;
+            cursor: not-allowed;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper blue darken-3">
+        <a href="#" class="brand-logo left" style="padding-left: 20px">TimeTrace</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+    <li><a href="@{/logout}">Logout</a></li>
+</ul>
+
+<div class="container">
+    <h3 class="center-align">Add Time Entry</h3>
+
+    <!-- Error Message -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert" style="background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; padding: 1rem; margin-top: 20px;">
+        <strong th:text="${errorMessage}"></strong>
+    </div>
+
+    <div class="row">
+        <form class="col s12" th:action="@{/add-time-entry}" th:object="${timeEntry}" method="post">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="hours" type="number" class="validate" th:field="*{hours}" required>
+                    <label for="hours">Hours</label>
+                </div>
+                <div class="input-field col s6">
+                    <input id="taskDescription" type="text" class="validate" th:field="*{taskDescription}" required>
+                    <label for="taskDescription">Task Description</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="projects" name="projects" th:field="*{project}">
+                        <option th:each="project : ${T(com.dev.timetracker.entity.Project).values()}"
+                                th:value="${project}" th:text="${project.name}"></option>
+                    </select>
+                    <label for="projects">Choose a Project</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" style="display: flex; justify-content: center; align-items: center;">
+                Add Entry
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+
+    <h3 class="center-align">Weekly Time Entries</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>Hours</th>
+            <th>Task Description</th>
+            <th>Project</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${timeEntriesPage.content}">
+            <td th:text="${entry.timestamp}"></td>
+            <td th:text="${entry.hours}"></td>
+            <td th:text="${entry.taskDescription}"></td>
+            <td th:text="${entry.project.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls for Weekly Time Entries -->
+    <!-- Pagination Controls for Weekly Time Entries -->
+    <div class="pagination">
+        <ul class="pagination">
+            <li th:class="${currentPage == 0} ? 'disabled' : ''">
+                <a th:href="@{/entries(weeklyPage=${currentPage-1}, totalHrsPage=${totalHrsCurrentPage})}">
+                    <i class="material-icons">chevron_left</i>
+                </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(0, weeklyTotalPages > 0 ? weeklyTotalPages - 1 : weeklyTotalPages)}"  th:class="${i == currentPage} ? 'active' : ''">
+                <a th:href="@{/entries(weeklyPage=${i}, totalHrsPage=${totalHrsCurrentPage})}" th:text="${i + 1}"></a>
+            </li>
+            <li th:class="${currentPage == weeklyTotalPages - 1} ? 'disabled' : ''">
+                <a th:href="@{/entries(weeklyPage=${currentPage+1}, totalHrsPage=${totalHrsCurrentPage})}">
+                    <i class="material-icons">chevron_right</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <h3 class="center-align">Total Hours Per Project</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Project</th>
+            <th>Total Hours</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${totalHoursPerProject}">
+            <td th:text="${entry[0].name}"></td>
+            <td th:text="${entry[1]}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls for Total Hours Per Project -->
+    <div class="pagination">
+        <ul class="pagination">
+            <li th:class="${totalHrsCurrentPage == 0} ? 'disabled' : ''">
+                <a th:href="@{/entries(weeklyPage=${currentPage}, totalHrsPage=${totalHrsCurrentPage-1})}">
+                    <i class="material-icons">chevron_left</i>
+                </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(0, totalHrsTotalPages > 0 ? totalHrsTotalPages - 1 : totalHrsTotalPages)}" th:class="${i == totalHrsCurrentPage} ? 'active' : ''">
+                <a th:href="@{/entries(weeklyPage=${currentPage}, totalHrsPage=${i})}" th:text="${i + 1}">1</a>
+            </li>
+            <li th:class="${totalHrsCurrentPage == totalHrsTotalPages - 1} ? 'disabled' : ''">
+                <a th:href="@{/entries(weeklyPage=${currentPage}, totalHrsPage=${totalHrsCurrentPage+1})}">
+                    <i class="material-icons">chevron_right</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+</script>
+</body>
+</html>

@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * To transfer data between controller layer and view layer
+ * We use this class to transfer the data between the controller layer and the view layer.
+ * And also for form binding.
  */
 
 @Getter
@@ -16,7 +17,10 @@ import lombok.Setter;
 public class UserDto {
     private Long id;
     private String firstName;
+
     private String lastName;
+
     private String email;
+
     private String password;
 }

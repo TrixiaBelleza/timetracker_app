@@ -1,6 +1,5 @@
 package com.dev.timetracker.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,9 +22,9 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable=false, unique=true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable=false)
     private String password;
 }
