@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Bootstrap default background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            display: flex;
+            background-color: white;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+        }
+        .login-left {
+            background-color: #a6e3e9;
+            padding: 2rem;
+            width: 50%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-left div {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .login-right {
+            padding: 2rem;
+            width: 50%;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .btn-primary {
+            background-color: #00bfa6;
+            border-color: #00bfa6;
+        }
+        .btn-primary:hover {
+            background-color: #009688;
+            border-color: #009688;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-left">
+        <!-- Placeholder for logo and name -->
+        <div>
+            <!-- Add your logo image and company name here -->
+            <h1>TimeTrace</h1>
+            <p>A timetracker for your project</p>
+        </div>
+    </div>
+    <div class="login-right">
+        <div th:if="${param.error}" class="alert alert-danger">
+            Invalid Email or Password
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+            You have been logged out.
+        </div>
+        <h2>Log in</h2>
+        <form method="post" role="form" th:action="@{/login}" class="form-horizontal">
+            <div class="form-group mb-3">
+                <label class="control-label">Email</label>
+                <input type="text" id="username" name="username" class="form-control"
+                       placeholder="Enter email address"/>
+            </div>
+            <div class="form-group mb-3">
+                <label class="control-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control"
+                       placeholder="Enter your password"/>
+            </div>
+            <div class="form-group mb-3">
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </div>
+            <div class="form-group mb-3">
+                <span>Not yet registered? <a th:href="@{/register}">Sign Up Here</a></span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+</body>
+</html>
