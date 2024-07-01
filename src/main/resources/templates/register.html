@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Bootstrap default background color */
+        }
+        .card {
+            margin-top: 20px; /* Margin top for the card */
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Card shadow */
+        }
+        .card-header {
+            background-color: #f8f9fa; /* Light background for card header */
+            border-bottom: 1px solid #dee2e6; /* Bottom border for card header */
+            background-color: #a6e3e9;
+        }
+        .form-group {
+            margin-bottom: 1rem; /* Margin bottom for form groups */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Bootstrap primary button color */
+            border-color: #007bff; /* Bootstrap primary button border color */
+        }
+        .btn-primary:hover {
+            background-color: #0069d9; /* Darker hover color */
+            border-color: #0062cc; /* Darker hover border color */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card">
+                <div class="card-header">
+                    <br>
+                    <h2 class="center-align">Account Registration</h2>
+                    <br>
+                </div>
+
+                <!-- Error Message -->
+                <div th:if="${errorMessage}" class="alert alert-danger" role="alert" style="background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; padding: 1rem; margin-top: 20px;">
+                    <strong th:text="${errorMessage}"></strong>
+                </div>
+
+                <div th:if="${param.success}" class="alert alert-success" role="alert" style="background-color: #d4edda; border-color: #c3e6cb; color: #155724; padding: 1rem; margin-top: 20px;">
+                    <strong>You have successfully registered in TimeTrace!</strong>
+                </div>
+                <div class="card-content">
+                    <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="firstName" name="firstName" placeholder="Enter first name"
+                                       th:field="*{firstName}" type="text" class="validate">
+                                <label for="firstName">First Name</label>
+                                <p th:errors="*{firstName}" class="text-danger"></p>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="lastName" name="lastName" placeholder="Enter last name"
+                                       th:field="*{lastName}" type="text" class="validate">
+                                <label for="lastName">Last Name</label>
+                                <p th:errors="*{lastName}" class="text-danger"></p>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="email" name="email" placeholder="Enter email address"
+                                       th:field="*{email}" type="email" class="validate">
+                                <label for="email">Email</label>
+                                <p th:errors="*{email}" class="text-danger"></p>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="password" name="password" placeholder="Enter password"
+                                       th:field="*{password}" type="password" class="validate">
+                                <label for="password">Password</label>
+                                <p th:errors="*{password}" class="text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12">
+                                <button class="btn btn-primary" type="submit">Register</button>
+                            </div>
+                            <br>
+                            <br>
+                            <span style="padding-left: 10px;">Already registered? <a href="@{/login}">Login here</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
