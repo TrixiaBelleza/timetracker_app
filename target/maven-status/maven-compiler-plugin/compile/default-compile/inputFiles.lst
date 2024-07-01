@@ -1,0 +1,16 @@
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/TimetrackerApplication.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/config/Config.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/config/SpringSecurity.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/controller/AuthController.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/controller/TimeEntryController.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/dto/UserDto.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/entity/Project.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/entity/TimeEntry.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/entity/User.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/repository/TimeEntryRepository.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/repository/UserRepository.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/security/CustomUserDetailsService.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/service/TimeEntryService.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/service/UserService.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/service/impl/TimeEntryServiceImpl.java
+/Users/trixiabelleza/Documents/app-worktree/feature/add-docker-file/src/main/java/com/dev/timetracker/service/impl/UserServiceImpl.java

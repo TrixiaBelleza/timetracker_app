@@ -1,0 +1,16 @@
+com/dev/timetracker/controller/AuthController.class
+com/dev/timetracker/repository/TimeEntryRepository.class
+com/dev/timetracker/config/Config.class
+com/dev/timetracker/config/SpringSecurity.class
+com/dev/timetracker/controller/TimeEntryController.class
+com/dev/timetracker/entity/TimeEntry.class
+com/dev/timetracker/entity/Project.class
+com/dev/timetracker/security/CustomUserDetailsService.class
+com/dev/timetracker/dto/UserDto.class
+com/dev/timetracker/service/impl/UserServiceImpl.class
+com/dev/timetracker/repository/UserRepository.class
+com/dev/timetracker/service/UserService.class
+com/dev/timetracker/TimetrackerApplication.class
+com/dev/timetracker/entity/User.class
+com/dev/timetracker/service/TimeEntryService.class
+com/dev/timetracker/service/impl/TimeEntryServiceImpl.class
