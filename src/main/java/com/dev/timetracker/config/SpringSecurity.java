@@ -35,11 +35,14 @@ public class SpringSecurity {
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/index", true)
+                                .defaultSuccessUrl("/entries", true)
                                 .permitAll()
+
                 ).logout(
-                        logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                        logout -> logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 );
+
         return http.build();
     }
 

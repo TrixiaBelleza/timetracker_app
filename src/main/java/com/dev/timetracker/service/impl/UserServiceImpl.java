@@ -7,7 +7,12 @@ import com.dev.timetracker.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+/**
+ * Implements the UserService interface which defines methods for working with users.
+ */
+@Service
 public class UserServiceImpl implements UserService {
     private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -20,24 +25,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        return null;
-    }
-
-    @Override
     public void saveUser(UserDto userDto) {
         try {
             User user = new User();
-            String name = userDto.getFirstName() + " " + userDto.getLastName();
-            user.setName(name);
-            user.setEmail(user.getEmail());
+            user.setName(userDto.getFirstName() + " " + userDto.getLastName());
+            user.setEmail(userDto.getEmail());
 
-            // Encrypt password using PasswordEncoder
+            // Encrypt password
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             userRepository.save(user);
             logger.debug("Successfully saved user: " + user.getId());
         } catch (Exception e) {
             logger.warn("Failed to save user with user id: " + userDto.getId() + " due to: " + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
