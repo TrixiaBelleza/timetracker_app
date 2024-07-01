@@ -12,7 +12,7 @@
 	<artifactId>timetracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>timetracker</name>
-	<description>Time Tracker for users to track time spent in projects</description>
+	<description>Time Tracker for users to track time spent for projects</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -27,7 +27,10 @@
 		<url/>
 	</scm>
 	<properties>
+		<junit.version>4.13.1</junit.version>
 		<java.version>17</java.version>
+		<maven-surefire-report-plugin.version>2.22.2</maven-surefire-report-plugin.version>
+		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -70,6 +73,24 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>4.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
@@ -90,6 +111,12 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>${maven-surefire-report-plugin.version}</version>
+			</plugin>
+
 		</plugins>
 	</build>
 
